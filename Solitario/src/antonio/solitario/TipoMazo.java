@@ -1,0 +1,6 @@
+package antonio.solitario;
+
+public enum TipoMazo {
+	BARAJA, DESCARTE, FINAL1, FINAL2, FINAL3, FINAL4,
+	INTERMEDIO1, INTERMEDIO2, INTERMEDIO3, INTERMEDIO4
+}

@@ -1,0 +1,49 @@
+
+
+Mazo
+	conjunto de Carta
+	Tamaño
+	
+Carta
+	posicion bocaArriba y bocaAbajo
+	color rojo y negro
+	palo diamantes, picas, trebol, corazones
+	numero 1 - 13
+	
+Palo
+	enum 
+Color 
+	enum
+Posicion
+	enum 
+	
+Tipos de Mazo (clases que HEREDAN de Mazo)
+	Baraja
+		Nace con todas las cartas y barajadas
+		No se puede agregar aquí
+	Descarte
+		Se pasan de 3 en 3 desde la baraja
+		Cuando la baraja se termina se devuelven todas las que queden
+		No se puede agregar aquí
+	MazoIntermedio
+		Agregar carta solo si el color es distinto y un número menos que la última
+		Si está vacío, el número debe ser el 13, de cualquier palo
+	MazoFinal
+		Agregar carta si el palo es el mismo y un número más que la última
+		Si está vacío el número debe ser el 1, de cualquier palo
+		
+		
+		
+		Crear clase MazoFinal, que hereda de Mazo
+		Sobreescribir el método agregarCarta
+		Cambiar el comportamiento del mismo conforme a las reglas
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
