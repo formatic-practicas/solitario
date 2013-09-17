@@ -1,4 +1,6 @@
-package antonio.solitario;
+package solitario;
+
+
 
 public class MazoFinal extends Mazo {
 	@Override

@@ -1,4 +1,5 @@
-package antonio.solitario;
+package solitario;
+
 
 import static org.junit.Assert.assertTrue;
 

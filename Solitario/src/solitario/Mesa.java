@@ -1,4 +1,6 @@
-package antonio.solitario;
+package solitario;
+
+
 
 public class Mesa {
 

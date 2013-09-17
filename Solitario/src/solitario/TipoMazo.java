@@ -1,4 +1,5 @@
-package antonio.solitario;
+package solitario;
+
 
 public enum TipoMazo {
 	BARAJA, DESCARTE, FINAL1, FINAL2, FINAL3, FINAL4,

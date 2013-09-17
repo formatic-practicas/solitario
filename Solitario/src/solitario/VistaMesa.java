@@ -1,14 +1,16 @@
-package antonio.solitario;
+package solitario;
 
+
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class VistaMesa extends JPanel {
 
+	private VistaMazo selected;
 	public VistaMesa(Mesa mesa){
 		this.mesa = mesa;
 		setLayout(null);
@@ -52,12 +54,27 @@ public class VistaMesa extends JPanel {
 		VistaMazo intermedio4 = new VistaMazo(mesa.mazos[TipoMazo.INTERMEDIO4.ordinal()]);
 		intermedio4.setLocation(301, 75);
 		add(intermedio4);
-		addMouseListener(new MouseAdapter() {
-			
+		addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				if(selected!= null){
+					selected.setLocation(e.getPoint());
+				}
+			}
 		});
-		
-	
-		
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Component c = VistaMesa.this.getComponentAt(e.getPoint());
+				if(c!= null && c != VistaMesa.this){
+					selected = (VistaMazo)c;
+				}
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				selected = null;
+			}
+		});	
 	}
 	
 	Mesa mesa;

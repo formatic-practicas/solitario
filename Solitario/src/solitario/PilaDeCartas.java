@@ -1,4 +1,5 @@
-package antonio.solitario;
+package solitario;
+
 
 public interface PilaDeCartas {
 

@@ -1,4 +1,5 @@
-package antonio.solitario;
+package solitario;
+
 
 public class Carta {
 	public Carta(int numero, Palo palo) {
