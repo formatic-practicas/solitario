@@ -14,6 +14,7 @@ public class VistaMesa extends JPanel {
 
 	public VistaMesa(Mesa mesa) {
 		this.mesa = mesa;
+		barajaSeleccionada = false;
 		setSize(400, 400);
 		panelCartas = new JPanel();
 		panelCartas.setLayout(null);
@@ -39,24 +40,35 @@ public class VistaMesa extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Component c = VistaMesa.this.panelCartas.getComponentAt(e
+				Component b = VistaMesa.this.panelMazos.getComponentAt(e
 						.getPoint());
-				if (c != null && c != VistaMesa.this.panelCartas) {
-					selected = (VistaCarta) c;
+				if (b != null && b == vistaBaraja) {
+					barajaSeleccionada = true;
+				} else {
+					Component c = VistaMesa.this.panelCartas.getComponentAt(e
+							.getPoint());
+					if (c != null && c != VistaMesa.this.panelCartas) {
+						selected = (VistaCarta) c;
+					}
 				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Component c = VistaMesa.this.panelMazos.getComponentAt(e
-						.getPoint());
-				if (c != null && c != VistaMesa.this.panelMazos) {
-					VistaMazo vistaMazo = (VistaMazo) c;
-					if (selected != null) {
-						Carta carta = selected.getCarta();
-						Mazo old = carta.getMazo();
-						if (vistaMazo.mazo.agregarCarta(carta)) {
-							old.extraerCarta();
+				if (barajaSeleccionada) {
+					VistaMesa.this.mesa.sacarDeBarajaADescarte();
+					barajaSeleccionada = false;
+				} else {
+					Component c = VistaMesa.this.panelMazos.getComponentAt(e
+							.getPoint());
+					if (c != null && c != VistaMesa.this.panelMazos) {
+						VistaMazo vistaMazo = (VistaMazo) c;
+						if (selected != null) {
+							Carta carta = selected.getCarta();
+							Mazo old = carta.getMazo();
+							if (vistaMazo.mazo.agregarCarta(carta)) {
+								old.extraerCarta();
+							}
 						}
 					}
 				}
@@ -69,7 +81,7 @@ public class VistaMesa extends JPanel {
 	private void colocarCartas(Mesa mesa) {
 		panelCartas.removeAll();
 		panelCartas.repaint();
-		
+
 		if (!mesa.mazos[TipoMazo.DESCARTE.ordinal()].estaVacio()) {
 			VistaCarta vistaCartaDescarte = new VistaCarta(
 					mesa.mazos[TipoMazo.DESCARTE.ordinal()].getUltimaCarta());
@@ -105,14 +117,40 @@ public class VistaMesa extends JPanel {
 			panelCartas.add(intermedio4);
 		}
 
+		if (!mesa.mazos[TipoMazo.FINAL1.ordinal()].estaVacio()) {
+			VistaCarta final1 = new VistaCarta(
+					mesa.mazos[TipoMazo.FINAL1.ordinal()].getUltimaCarta());
+			final1.setLocation(120, 5);
+			panelCartas.add(final1);
+		}
+
+		if (!mesa.mazos[TipoMazo.FINAL2.ordinal()].estaVacio()) {
+			VistaCarta final2 = new VistaCarta(
+					mesa.mazos[TipoMazo.FINAL2.ordinal()].getUltimaCarta());
+			final2.setLocation(182, 5);
+			panelCartas.add(final2);
+		}
+
+		if (!mesa.mazos[TipoMazo.FINAL3.ordinal()].estaVacio()) {
+			VistaCarta final3 = new VistaCarta(
+					mesa.mazos[TipoMazo.FINAL3.ordinal()].getUltimaCarta());
+			final3.setLocation(241, 5);
+			panelCartas.add(final3);
+		}
+
+		if (!mesa.mazos[TipoMazo.FINAL4.ordinal()].estaVacio()) {
+			VistaCarta final4 = new VistaCarta(
+					mesa.mazos[TipoMazo.FINAL4.ordinal()].getUltimaCarta());
+			final4.setLocation(301, 5);
+			panelCartas.add(final4);
+		}
 		panelCartas.revalidate();
 		panelCartas.repaint();
 
 	}
 
 	private void colocarMazos(Mesa mesa) {
-		VistaMazo vistaBaraja = new VistaMazo(
-				mesa.mazos[TipoMazo.BARAJA.ordinal()]);
+		vistaBaraja = new VistaMazo(mesa.mazos[TipoMazo.BARAJA.ordinal()]);
 		panelMazos.add(vistaBaraja);
 		vistaBaraja.setLocation(0, 5);
 
@@ -159,6 +197,8 @@ public class VistaMesa extends JPanel {
 	}
 
 	Mesa mesa;
+	private VistaMazo vistaBaraja;
+	boolean barajaSeleccionada;
 
 	public static void main(String[] args) {
 		Mesa mesa = new Mesa();

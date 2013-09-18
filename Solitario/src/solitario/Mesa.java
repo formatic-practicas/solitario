@@ -65,12 +65,27 @@ public class Mesa {
 		return !(mazos[tipoMazo.ordinal()].estaVacio());
 			
 	}
+	public void sacarDeBarajaADescarte(){
+		int maxCartas = 3;
+		int numCartas = mazos[TipoMazo.BARAJA.ordinal()].getNumCartas();
+		if(numCartas < maxCartas){
+			maxCartas = numCartas;
+		}
+		if(maxCartas == 0){
+			moverDescarteABaraja();
+		}else{
+			for(int n=0; n<maxCartas; n++){
+				Carta c = mazos[TipoMazo.BARAJA.ordinal()].extraerCarta();
+				mazos[TipoMazo.DESCARTE.ordinal()].agregarCarta(c);
+			}
+		}
+		
+	}
 	private void moverDescarteABaraja() {
 		while(!mazos[TipoMazo.DESCARTE.ordinal()].estaVacio()){
 			Carta c = mazos[TipoMazo.DESCARTE.ordinal()].extraerCarta();
 			mazos[TipoMazo.BARAJA.ordinal()].agregarCarta(c);
 		}
-		
 	}
 	// TODO sacar de aqui la accion y dejar solo la condición
 	boolean elegirMazoHasta(TipoMazo tipoMazo){
