@@ -65,4 +65,12 @@ public class Carta {
 	private Estado estado;
 	private Palo palo;
 	private int numero;
+	Mazo mazo;
+	public Mazo getMazo() {
+		return mazo;
+	}
+
+	public void setMazo(Mazo mazo) {
+		this.mazo = mazo;
+	}
 }

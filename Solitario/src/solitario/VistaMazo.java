@@ -8,12 +8,7 @@ public class VistaMazo extends JPanel {
 
 	public VistaMazo(Mazo mazo){
 		this.mazo = mazo;
-		setBackground(java.awt.Color.WHITE);
-		JLabel l = new JLabel(mazo.toString());
-		if(!mazo.estaVacio() && mazo.getUltimaCarta().getColor() == Color.ROJO){
-			l.setForeground(java.awt.Color.RED);
-		}
-		add(l);
+		setBackground(java.awt.Color.GREEN);
 		setSize(50, 50);
 	}
 

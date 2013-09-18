@@ -36,6 +36,7 @@ public class Mazo implements PilaDeCartas {
 		Carta tmp = getUltimaCarta();
 		cartas[numCartas - 1] = null;
 		numCartas--;
+		tmp.setMazo(null);
 		return tmp;
 	}
 
@@ -43,6 +44,7 @@ public class Mazo implements PilaDeCartas {
 	public boolean agregarCarta(Carta carta, boolean sinReglas) {
 		cartas[numCartas] = carta;
 		numCartas++;
+		carta.setMazo(this);
 		return true;
 	}
 
