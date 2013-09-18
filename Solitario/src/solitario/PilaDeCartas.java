@@ -8,6 +8,8 @@ public interface PilaDeCartas {
 	public abstract void barajar();
 
 	public abstract Carta extraerCarta();
+
+	public abstract boolean puedoAgregarCarta(Carta carta);
 	
 	public abstract boolean agregarCarta(Carta carta);
 

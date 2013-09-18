@@ -19,4 +19,10 @@ public class Baraja extends Mazo {
 		barajar();
 	}
 
+	@Override
+	public boolean puedoAgregarCarta(Carta carta) {
+		return false;
+	}
+	
+
 }

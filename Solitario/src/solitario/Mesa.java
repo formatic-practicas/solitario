@@ -1,10 +1,6 @@
 package solitario;
 
-
-
 public class Mesa {
-
-	
 	public Mesa(){
 		mazos= new Mazo[TipoMazo.values().length];
 		mazos[TipoMazo.BARAJA.ordinal()] = new Baraja();
@@ -94,8 +90,9 @@ public class Mesa {
 			return false;
 		}
 		Carta carta = mazos[mazoDesde.ordinal()].getUltimaCarta();
-		if(mazos[mazoHasta.ordinal()].agregarCarta(carta)){
+		if(mazos[mazoHasta.ordinal()].puedoAgregarCarta(carta)){
 			mazos[mazoDesde.ordinal()].extraerCarta();
+			mazos[mazoHasta.ordinal()].agregarCarta(carta);
 			return true;
 		}
 		return false;

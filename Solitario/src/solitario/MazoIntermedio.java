@@ -1,27 +1,34 @@
 package solitario;
 
-
-
 public class MazoIntermedio extends Mazo {
 	@Override
 	public String toString() {
-		if(estaVacio()){
+		if (estaVacio()) {
 			return "[]";
 		}
-		return ""+getNumCartas()+ " ["+ getUltimaCarta().toString()+"]";
+		return "" + getNumCartas() + " [" + getUltimaCarta().toString() + "]";
 	}
+
 	@Override
-	public boolean agregarCarta(Carta carta) {
+	public boolean puedoAgregarCarta(Carta carta) {
 		if (estaVacio()) {
 			if (carta.getNumero() == 13) {
-				return super.agregarCarta(carta);
+				return true;
 			}
 		} else {
 			if (carta.getColor() != getUltimaCarta().getColor()) {
 				if (carta.getNumero() == getUltimaCarta().getNumero() - 1) {
-					return super.agregarCarta(carta);
+					return true;
 				}
 			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean agregarCarta(Carta carta) {
+		if (puedoAgregarCarta(carta)) {
+			return super.agregarCarta(carta);
 		}
 		return false;
 	}

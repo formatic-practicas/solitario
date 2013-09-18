@@ -10,19 +10,28 @@ public class MazoFinal extends Mazo {
 		}
 		return "(" + getUltimaCarta().toString() + ")";
 	}
+	
 	@Override
-	public boolean agregarCarta(Carta carta) {
+	public boolean puedoAgregarCarta(Carta carta) {
 		if(estaVacio()){
 			if(carta.getNumero() == 1){
-				return super.agregarCarta(carta);
+				return true;
 			}
 		}else{
 			if(carta.getPalo() == getUltimaCarta().getPalo()){
 				if(carta.getNumero() == getUltimaCarta().getNumero()+1){
-					return super.agregarCarta(carta);
+					return true;
 				}
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public boolean agregarCarta(Carta carta) {
+		if(puedoAgregarCarta(carta)){
+				return super.agregarCarta(carta);
+			}
 		return false;
 	}
 }

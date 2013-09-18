@@ -1,7 +1,5 @@
 package solitario;
 
-
-
 public class Mazo implements PilaDeCartas {
 
 	private static final int MAX_CARTAS = 52;
@@ -20,8 +18,8 @@ public class Mazo implements PilaDeCartas {
 
 	@Override
 	public void barajar() {
-		for(int n=0; n<numCartas; n++){
-			int pos = (int)(Math.random()*numCartas);
+		for (int n = 0; n < numCartas; n++) {
+			int pos = (int) (Math.random() * numCartas);
 			Carta tmp = cartas[n];
 			cartas[n] = cartas[pos];
 			cartas[pos] = tmp;
@@ -64,6 +62,11 @@ public class Mazo implements PilaDeCartas {
 	@Override
 	public boolean estaVacio() {
 		return numCartas == 0;
+	}
+
+	@Override
+	public boolean puedoAgregarCarta(Carta carta) {
+		return true;
 	}
 
 }
