@@ -66,10 +66,10 @@ public class VistaMesa extends JPanel {
 						if (selected != null) {
 							Carta carta = selected.getCarta();
 							Mazo old = carta.getMazo();
-//							if (vistaMazo.mazo.agregarCarta(carta)) {
-//								old.extraerCarta();
-//							}
-							
+							if(vistaMazo.mazo.puedoAgregarCarta(carta)){
+								old.extraerCarta();
+								vistaMazo.mazo.agregarCarta(carta);
+							}
 						}
 					}
 				}
