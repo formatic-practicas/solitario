@@ -69,4 +69,13 @@ public class Mazo implements PilaDeCartas {
 		return true;
 	}
 
+	@Override
+	public Carta getUltimaCarta(int numCartaDesdeElFinal) {
+		if (estaVacio()) {
+			return null;
+		}
+		return cartas[(numCartas  -1) - numCartaDesdeElFinal];
+
+	}
+
 }

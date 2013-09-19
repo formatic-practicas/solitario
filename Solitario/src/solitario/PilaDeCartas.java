@@ -16,6 +16,8 @@ public interface PilaDeCartas {
 	public abstract boolean agregarCarta(Carta carta, boolean sinReglas);
 
 	public abstract Carta getUltimaCarta();
+	
+	public abstract Carta getUltimaCarta(int numCartaDesdeElFinal);
 
 	public abstract boolean estaVacio();
 

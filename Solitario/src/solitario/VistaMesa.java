@@ -90,6 +90,17 @@ public class VistaMesa extends JPanel {
 			vistaCartaDescarte.setLocation(60, 5);
 		}
 
+//		if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
+//			int order = 0;
+//			for(int n=mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getNumCartas()-1; n>=0; n--){
+//				VistaCarta intermedio1 = new VistaCarta(
+//						mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta(n));
+//				intermedio1.setLocation(120, 75+(20*n));
+//				panelCartas.add(intermedio1);
+//				panelCartas.setComponentZOrder(intermedio1, n);
+//				
+//			}
+//		}
 		if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
 			VistaCarta intermedio1 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta());
