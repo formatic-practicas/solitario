@@ -1,34 +1,41 @@
 package solitario;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class VistaMesa extends JPanel {
 
-	private VistaCarta selected;
-	JPanel panelCartas, panelMazos;
 
 	public VistaMesa(Mesa mesa) {
 		this.mesa = mesa;
+		setLayout(new BorderLayout());
 		barajaSeleccionada = false;
 		setSize(400, 400);
 		panelCartas = new JPanel();
 		panelCartas.setLayout(null);
 		panelCartas.setBounds(getBounds());
+
 		panelMazos = new JPanel();
 		panelMazos.setLayout(null);
+
 		panelMazos.setBounds(getBounds());
-		setLayout(null);
-		add(panelCartas);
+
+		add(panelCartas, BorderLayout.CENTER);
 		panelCartas.setOpaque(false);
-		add(panelMazos);
+		add(panelMazos, BorderLayout.CENTER);
+		estadoJuego = new EstadoJuego();
+		add(estadoJuego, BorderLayout.SOUTH);
 
 		colocarMazos(mesa);
 		colocarCartas(mesa);
+		actualizarEstadoJuego();
+
 		addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -56,7 +63,15 @@ public class VistaMesa extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (barajaSeleccionada) {
-					VistaMesa.this.mesa.sacarDeBarajaADescarte();
+					if(VistaMesa.this.mesa.mazos[TipoMazo.BARAJA.ordinal()].estaVacio()){
+						if(VistaMesa.this.mesa.numRepartos > 0){
+							VistaMesa.this.mesa.moverDescarteABaraja();
+							actualizarRepartos();
+						}
+					}else{
+						VistaMesa.this.mesa.sacarDeBarajaADescarte();
+					}
+					actualizarCartas();
 					barajaSeleccionada = false;
 				} else {
 					Component c = VistaMesa.this.panelMazos.getComponentAt(e
@@ -66,9 +81,10 @@ public class VistaMesa extends JPanel {
 						if (selected != null) {
 							Carta carta = selected.getCarta();
 							Mazo old = carta.getMazo();
-							if(vistaMazo.mazo.puedoAgregarCarta(carta)){
+							if (vistaMazo.mazo.puedoAgregarCarta(carta)) {
 								old.extraerCarta();
 								vistaMazo.mazo.agregarCarta(carta);
+								actualizarPuntos();
 							}
 						}
 					}
@@ -77,6 +93,32 @@ public class VistaMesa extends JPanel {
 				selected = null;
 			}
 		});
+	}
+
+	public void actualizarEstadoJuego(){
+		actualizarRepartos();
+		actualizarCartas();
+		actualizarPuntos();
+	}
+	protected void actualizarRepartos() {
+		estadoJuego.setRepartos(VistaMesa.this.mesa.numRepartos);
+	}
+
+	protected void actualizarCartas() {
+		estadoJuego.setCartas(this.mesa.mazos[TipoMazo.BARAJA.ordinal()].getNumCartas());
+	}
+
+	protected void actualizarPuntos() {
+		int puntos = 0;
+		for (int n = TipoMazo.FINAL1.ordinal(); n <= TipoMazo.FINAL4.ordinal(); n++) {
+			puntos += this.mesa.mazos[n].getNumCartas();
+		}
+		estadoJuego.setPuntos(puntos);
+		if (puntos == 52) {
+			FinDeJuego f = new FinDeJuego();
+			f.setVisible(true);
+		}
+
 	}
 
 	private void colocarCartas(Mesa mesa) {
@@ -90,17 +132,19 @@ public class VistaMesa extends JPanel {
 			vistaCartaDescarte.setLocation(60, 5);
 		}
 
-//		if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
-//			int order = 0;
-//			for(int n=mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getNumCartas()-1; n>=0; n--){
-//				VistaCarta intermedio1 = new VistaCarta(
-//						mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta(n));
-//				intermedio1.setLocation(120, 75+(20*n));
-//				panelCartas.add(intermedio1);
-//				panelCartas.setComponentZOrder(intermedio1, n);
-//				
-//			}
-//		}
+		// if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
+		// int order = 0;
+		// for(int
+		// n=mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getNumCartas()-1; n>=0;
+		// n--){
+		// VistaCarta intermedio1 = new VistaCarta(
+		// mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta(n));
+		// intermedio1.setLocation(120, 75+(20*n));
+		// panelCartas.add(intermedio1);
+		// panelCartas.setComponentZOrder(intermedio1, n);
+		//
+		// }
+		// }
 		if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
 			VistaCarta intermedio1 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta());
@@ -211,14 +255,8 @@ public class VistaMesa extends JPanel {
 	Mesa mesa;
 	private VistaMazo vistaBaraja;
 	boolean barajaSeleccionada;
+	private VistaCarta selected;
+	JPanel panelCartas, panelMazos;
+	EstadoJuego estadoJuego;
 
-	public static void main(String[] args) {
-		Mesa mesa = new Mesa();
-		VistaMesa v = new VistaMesa(mesa);
-		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.getContentPane().add(v);
-		f.setSize(400, 400);
-		f.setVisible(true);
-	}
 }

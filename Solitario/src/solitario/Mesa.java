@@ -31,6 +31,7 @@ public class Mesa {
 				mazos[TipoMazo.BARAJA.ordinal()].extraerCarta()
 				, true
 		); 
+		numRepartos = MAX_REPARTOS;
 	}
 	@Override
 	public String toString() {
@@ -67,9 +68,7 @@ public class Mesa {
 		if(numCartas < maxCartas){
 			maxCartas = numCartas;
 		}
-		if(maxCartas == 0){
-			moverDescarteABaraja();
-		}else{
+		if(maxCartas > 0){
 			for(int n=0; n<maxCartas; n++){
 				Carta c = mazos[TipoMazo.BARAJA.ordinal()].extraerCarta();
 				mazos[TipoMazo.DESCARTE.ordinal()].agregarCarta(c);
@@ -77,11 +76,12 @@ public class Mesa {
 		}
 		
 	}
-	private void moverDescarteABaraja() {
+	public void moverDescarteABaraja() {
 		while(!mazos[TipoMazo.DESCARTE.ordinal()].estaVacio()){
 			Carta c = mazos[TipoMazo.DESCARTE.ordinal()].extraerCarta();
 			mazos[TipoMazo.BARAJA.ordinal()].agregarCarta(c);
 		}
+		numRepartos--;
 	}
 	// TODO sacar de aqui la accion y dejar solo la condición
 	boolean elegirMazoHasta(TipoMazo tipoMazo){
@@ -99,6 +99,8 @@ public class Mesa {
 	}
 	TipoMazo mazoDesde, mazoHasta;
 	Mazo[] mazos;
+	int numRepartos;
+	final int MAX_REPARTOS = 3;
 	
 	
 }
