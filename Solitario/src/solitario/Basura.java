@@ -4,8 +4,6 @@ package solitario;
  * 
  */
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -33,7 +31,9 @@ public class Basura extends JPanel {
 	public Basura() {
 		setSize(56, 78);
 		try {
-			image = ImageIO.read(new File("classic_13x4x560x780.png"));
+			if(image == null){
+				image = ImageIO.read(new File("classic_13x4x560x780.png"));
+			}
 			width = 560;
 			height = 780;
 			palo = 0;
@@ -54,12 +54,9 @@ public class Basura extends JPanel {
 				numero++;
 				repaint();
 			}
-			
 		});
-
 	}
-
-	BufferedImage image;
+	static BufferedImage image;
 	int palo;
 	int numero;
 	int width, height;

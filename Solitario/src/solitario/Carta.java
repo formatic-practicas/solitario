@@ -1,6 +1,10 @@
 package solitario;
 
-
+/**
+ * 
+ * @author alumno
+ * 
+ */
 public class Carta {
 	public Carta(int numero, Palo palo) {
 		this(numero, palo, Estado.BOCA_ABAJO);
@@ -11,7 +15,11 @@ public class Carta {
 		this.palo = palo;
 		this.estado = estado;
 	}
-
+/**
+ * 
+ * @param palo
+ * @return El palo convertido a cadena
+ */
 	String paloToSymbol(Palo palo) {
 		switch (palo) {
 		case DIAMANTES:

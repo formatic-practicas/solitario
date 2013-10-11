@@ -125,79 +125,68 @@ public class VistaMesa extends JPanel {
 		panelCartas.removeAll();
 		panelCartas.repaint();
 
+		int columna=300;
 		if (!mesa.mazos[TipoMazo.DESCARTE.ordinal()].estaVacio()) {
 			VistaCarta vistaCartaDescarte = new VistaCarta(
 					mesa.mazos[TipoMazo.DESCARTE.ordinal()].getUltimaCarta());
 			panelCartas.add(vistaCartaDescarte);
-			vistaCartaDescarte.setLocation(60, 5);
+			vistaCartaDescarte.setLocation(FILA_SUPERIOR, SEPARACION_HORIZONTAL +columna);
 		}
 
-		// if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
-		// int order = 0;
-		// for(int
-		// n=mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getNumCartas()-1; n>=0;
-		// n--){
-		// VistaCarta intermedio1 = new VistaCarta(
-		// mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta(n));
-		// intermedio1.setLocation(120, 75+(20*n));
-		// panelCartas.add(intermedio1);
-		// panelCartas.setComponentZOrder(intermedio1, n);
-		//
-		// }
-		// }
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].estaVacio()) {
 			VistaCarta intermedio1 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO1.ordinal()].getUltimaCarta());
-			intermedio1.setLocation(120, 75);
+			intermedio1.setLocation(columna, FILA_INFERIOR);
 			panelCartas.add(intermedio1);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.INTERMEDIO2.ordinal()].estaVacio()) {
 			VistaCarta intermedio2 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO2.ordinal()].getUltimaCarta());
-			intermedio2.setLocation(182, 75);
+			intermedio2.setLocation(columna,  FILA_INFERIOR);
 			panelCartas.add(intermedio2);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.INTERMEDIO3.ordinal()].estaVacio()) {
 			VistaCarta intermedio3 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO3.ordinal()].getUltimaCarta());
-			intermedio3.setLocation(241, 75);
+			intermedio3.setLocation(columna,  FILA_INFERIOR);
 			panelCartas.add(intermedio3);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.INTERMEDIO4.ordinal()].estaVacio()) {
 			VistaCarta intermedio4 = new VistaCarta(
 					mesa.mazos[TipoMazo.INTERMEDIO4.ordinal()].getUltimaCarta());
-			intermedio4.setLocation(301, 75);
+			intermedio4.setLocation(columna,  FILA_INFERIOR);
 			panelCartas.add(intermedio4);
 		}
-
+		columna=300;
 		if (!mesa.mazos[TipoMazo.FINAL1.ordinal()].estaVacio()) {
 			VistaCarta final1 = new VistaCarta(
 					mesa.mazos[TipoMazo.FINAL1.ordinal()].getUltimaCarta());
-			final1.setLocation(120, 5);
+			final1.setLocation(columna, FILA_SUPERIOR);
 			panelCartas.add(final1);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.FINAL2.ordinal()].estaVacio()) {
 			VistaCarta final2 = new VistaCarta(
 					mesa.mazos[TipoMazo.FINAL2.ordinal()].getUltimaCarta());
-			final2.setLocation(182, 5);
+			final2.setLocation(columna, FILA_SUPERIOR);
 			panelCartas.add(final2);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.FINAL3.ordinal()].estaVacio()) {
 			VistaCarta final3 = new VistaCarta(
 					mesa.mazos[TipoMazo.FINAL3.ordinal()].getUltimaCarta());
-			final3.setLocation(241, 5);
+			final3.setLocation(columna, FILA_SUPERIOR);
 			panelCartas.add(final3);
 		}
-
+		columna+= ANCHO_CARTA+SEPARACION_HORIZONTAL;
 		if (!mesa.mazos[TipoMazo.FINAL4.ordinal()].estaVacio()) {
 			VistaCarta final4 = new VistaCarta(
 					mesa.mazos[TipoMazo.FINAL4.ordinal()].getUltimaCarta());
-			final4.setLocation(301, 5);
+			final4.setLocation(columna, FILA_SUPERIOR);
 			panelCartas.add(final4);
 		}
 		panelCartas.revalidate();
@@ -206,6 +195,7 @@ public class VistaMesa extends JPanel {
 	}
 
 	private void colocarMazos(Mesa mesa) {
+		int columna=0;
 		vistaBaraja = new VistaMazo(mesa.mazos[TipoMazo.BARAJA.ordinal()]);
 		panelMazos.add(vistaBaraja);
 		vistaBaraja.setLocation(0, 5);
@@ -258,5 +248,11 @@ public class VistaMesa extends JPanel {
 	private VistaCarta selected;
 	JPanel panelCartas, panelMazos;
 	EstadoJuego estadoJuego;
+	final int ANCHO_CARTA=560;
+	final int ALTO_CARTA = 780;
+	final int SEPARACION_HORIZONTAL = 5;
+	final int SEPARACION_VERTICAL = 5;
+	final int FILA_SUPERIOR= 10;
+	final int FILA_INFERIOR= FILA_SUPERIOR+ALTO_CARTA+SEPARACION_VERTICAL;
 
 }

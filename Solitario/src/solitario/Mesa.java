@@ -1,5 +1,7 @@
 package solitario;
 
+
+
 public class Mesa {
 	public Mesa(){
 		mazos= new Mazo[TipoMazo.values().length];

@@ -9,7 +9,7 @@ public class VistaMazo extends JPanel {
 	public VistaMazo(Mazo mazo){
 		this.mazo = mazo;
 		setBackground(java.awt.Color.GREEN);
-		setSize(50, 50);
+		setSize(56,78);
 	}
 
 	public Mazo getMazo() {

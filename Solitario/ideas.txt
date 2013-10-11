@@ -1,0 +1,7 @@
+
+1. Ganar o perder (n vueltas como máximo) (los 4 montones finales estan llenos, 1 punto por cada carta=40 ptos)
+2. Partidas por tiempo
+3. Ponerle un marco con menus y barras de estado
+4. Imagen de las cartas reales
+5. Pista de que puedes soltar la carta ahí
+6. Arrastrar la carta por el punto donde pulsaste, no por la esquina 
